@@ -11,6 +11,8 @@
                 </div>
 
             {% else %}
+                <h3>Hi {{ user.username }}!</h3>
+
                 <p class="float-right"><a href="{% url 'rolls:create' %}">Add</a></p>
 
                 <ul clss="list-group">

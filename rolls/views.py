@@ -53,6 +53,7 @@ class SignupView(TemplateView):
 
         # If the username already exists, send the user back
         user = User.objects.filter(username=username)
+
         if user.count() > 0:
             return HttpResponseRedirect(reverse('rolls:signup'))
 
