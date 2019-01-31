@@ -1,0 +1,24 @@
+{% extends 'rolls/base.html' %}
+
+
+{% block content %}
+
+    <h2>Add a Roll to Your Library</h2>
+
+    <form method="post" action="{% url 'rolls:create' %}">
+        {% csrf_token %}
+        <table>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" name="title"/></td>
+        </tr>
+        <tr>
+            <td>Year Made</td>
+            <td><input type="text" name="year_made"></td>
+        </tr>
+        </table>
+
+        <input type="submit" value="Add Roll">
+    </form>
+
+{% endblock content %}

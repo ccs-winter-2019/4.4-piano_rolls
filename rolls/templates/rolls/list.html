@@ -1,0 +1,26 @@
+{% extends 'rolls/base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col">
+
+            {% if not user.is_authenticated %}
+                <div class="alert alert-danger" role="alert">
+                    Hey! If you want to track your rolls <a href="{% url 'login' %}">please login</a>!
+                </div>
+
+            {% else %}
+                <p class="float-right"><a href="{% url 'rolls:create' %}">Add</a></p>
+
+                <ul clss="list-group">
+                {% for roll in rolls %}
+                    <li>{{ roll.title }} -- {{ roll.year_made }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock content %}
