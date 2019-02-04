@@ -9,3 +9,4 @@ class Roll(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=255)
     year_made = models.IntegerField(default=1923)
+    image = models.URLField()

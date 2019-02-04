@@ -1,0 +1,17 @@
+{% extends 'rolls/base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col">
+
+            <h1>{{ roll.title }}</h1>
+
+            <p>
+                <img src="{{ roll.image }}"/>
+            </p>
+
+        </div>
+    </div>
+
+{% endblock content %}

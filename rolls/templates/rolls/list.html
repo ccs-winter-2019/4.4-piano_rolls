@@ -17,7 +17,7 @@
 
                 <ul clss="list-group">
                 {% for roll in rolls %}
-                    <li>{{ roll.title }} -- {{ roll.year_made }}</li>
+                    <li><a href="{% url 'rolls:detail' roll.id %}">{{ roll.title }} -- {{ roll.year_made }}</a></li>
                 {% endfor %}
                 </ul>
             {% endif %}

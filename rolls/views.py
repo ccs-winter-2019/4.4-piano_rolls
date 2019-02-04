@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.contrib.auth import get_user_model, login, authenticate
 
 from .models import Roll
@@ -22,6 +22,34 @@ class HomeView(TemplateView):
         return ctx
 
 
+class RollListView(ListView):
+    template_name = 'rolls/list.html'
+    model = Roll
+
+    def get_queryset(self, **kwargs):
+        query_set = super().get_queryset(**kwargs)  # Roll.objects.all()
+
+        user_id = self.kwargs.get('pk')
+
+        query_set = query_set.filter(user_id=user_id)
+
+        return query_set
+
+
+
+class DetailView(TemplateView):
+    template_name = 'rolls/detail.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+
+        roll_id = self.kwargs['awesome']
+
+        ctx['roll'] = Roll.objects.get(pk=roll_id)
+
+        return ctx
+
+
 # Create your views here.
 class CreateView(TemplateView):
     template_name = 'rolls/create.html'
@@ -30,7 +58,9 @@ class CreateView(TemplateView):
         title = self.request.POST.get('title')
         year_made = self.request.POST.get('year_made')
 
-        roll = Roll(title=title, year_made=year_made)
+        roll = Roll()
+        roll.title = title
+        roll.year_made = year_made
         roll.user = self.request.user
         roll.save()
 
